@@ -6,73 +6,29 @@
 <!--Feed-->
 
 <div class="ui two column grid">
-    
+  
   <div class="twelve wide column">
-      
     <div class="ui fluid raised card chatbox">
-      <div class="content">
-        <div class="ui feed">
-          
-          <% @messages.each do |message|  %>
-            <div class="event">
-              <div class="content">
-               <em><%= message.user.username %></em> : <%= message.body if message.body %>
-              </div>
-            </div>
-          <% end %>
-          
-            <!--<div class="event">-->
-            <!--  <div class="content">-->
-            <!--    <div class="summary">-->
-            <!--      <em>John Rockford</em>: Test message-->
-            <!--    </div>-->
-            <!--  </div>-->
-            <!--</div>-->
-                
-            <!--<div class="event">-->
-            <!--  <div class="content">-->
-            <!--    <div class="summary">-->
-            <!--      <em>Jake Matheson</em>: Test message-->
-            <!--    </div>-->
-            <!--  </div>-->
-            <!--</div>-->
-                
-            <!--<div class="event">-->
-            <!--  <div class="content">-->
-            <!--    <div class="summary">-->
-            <!--      <em>Sarah Smith</em>: Test message-->
-            <!--    </div>-->
-            <!--  </div>-->
-            <!--</div>-->
-                
-            <!--<div class="event">-->
-            <!--  <div class="content">-->
-            <!--    <div class="summary">-->
-            <!--      <em>Christian Rocha</em>: Test message-->
-            <!--    </div>-->
-            <!--  </div>-->
-            <!--</div>-->
-                
+      <div class="content" id="messages">
+        <div class="ui feed" id="message-container">
+          <%= render @messages %>
         </div>
-            
       </div>
       
       <div class="extra content">
-        <form class="ui reply form">
+        <%= form_for(@message, html: { class: "ui reply form", role: "form" }, url: message_path, remote:true) do |f| %>
           <div class="field">
             <div class="ui fluid icon input">
-              <input type="text" placeholder="Enter a message...">
-              <i class="bordered inverted orange edit icon"></i>
+              <%= f.text_field :body %>
+              <%= f.button '<i class="bordered inverted orange edit icon"></i>'.html_safe %>
             </div>
           </div>
-        </form>
+        <% end %>
       </div>
-      
     </div>
   </div>
     
   <div class="four wide column">
-    
     <div class="ui fluid raised card chatbox">
       <div class="content">
         <div class="ui inverted vertical pointing menu">
